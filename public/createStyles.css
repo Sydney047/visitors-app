@@ -1,0 +1,174 @@
+:root {
+    --bg: #0C2233;
+    --primary: #1B3C53;
+    --text-color: #91C8E4;
+}
+body {
+    background-color: var(--bg);
+    color: var(--text-color);
+    display: grid;
+    place-content: center;
+}
+nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 3px solid var(--text-color);
+    border-radius: 16px;
+    padding-left: 4ch;
+    box-shadow: 2px 4px 6px 4px var(--primary);
+    font-size: 1.1em;
+}
+svg {
+    height: 5ch;
+    width: 5ch;
+}
+.createContainer {
+    display: grid;
+    grid-template: 10ch 1fr / 1fr;
+}
+.creationDiv {
+    display: grid;
+}
+form {
+    display: grid;
+    grid-template: repeat( 3, 4ch ) 1fr 4ch/ 1fr 1fr;
+    grid-template-areas: 
+        "firstName lastName"
+        "email email"
+        "age unknown"
+        "bio bio"
+        "button button";
+    grid-gap: 24px;
+    padding: 32px;
+    box-sizing: border-box;
+    max-width: 450px;
+    background-color: var(--primary);
+    border-radius: 24px;
+    border: 1px solid var(--text-color);
+    place-content: center;
+}
+input, textarea {
+    background-color: var(--bg);
+    height: 4ch;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    color: var(--text-color);
+    padding-left: 2ch;
+    box-sizing: border-box;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border: 1px solid var(--text-color);
+}
+.email {
+    grid-area: email;
+}
+.age {
+    grid-area: age;
+}
+.bio {
+    grid-area: bio;
+}
+.creationDiv button, .updateForm button {
+    position: relative;
+    left: 13ch;
+    grid-area: button;
+    max-width: 200px;
+    height: 4ch;
+    border-radius: 8px;
+    background-color: #06923E;
+    color: #FFEECC;
+    border: none;
+}
+.creationDiv button:hover, .deleteForm button:hover, .updateForm button:hover {
+    cursor: pointer;
+    border: 1px solid var(--text-color);
+    box-shadow: 0px 1px 10px 2px var(--text-color);
+    transform: translateY(-3px);
+}
+a {
+    color: var(--text-color);
+    position: relative;
+    margin-top: 8px;
+}
+a::before {
+    content: 'Back to home';
+    position: absolute;
+    top: 0;
+    left: -2ch;
+    height: 3ch;
+    width: 100%;
+    font-size: .7em;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform .3s linear, opacity .3s linear;
+}
+a:hover::before {
+    opacity: .7;
+    transform: translateY(30px);
+}
+a svg {
+    height: 30px;
+    width: 30px;
+}
+a svg:hover {
+    height: 27px;
+    width: 27px;
+    opacity: .7;
+}
+/* styles for the component used to delete */
+.deleteContainer {
+    display: grid;
+}
+.deleteForm {
+    display: grid;
+    grid-gap: 16px;
+    grid-template: 6ch repeat( 2, 4ch ) / 1fr 3fr;
+    grid-template-areas: 
+        "caution caution"
+        "id email"
+        "button button";
+}
+.deleteCaution {
+    grid-area: caution;
+}
+.deleteForm button {
+    grid-area: button;
+    height: 4ch;
+    width: 200px;
+    margin-top: 16px;
+    background-color: #9A3B3B;
+    color: #FFEECC;
+    border-radius: 8px;
+    border: none;
+    position: relative;
+    left: 80px;
+}
+/* Styles for user information update */
+.updateForm {
+    display: grid;
+    grid-gap: 16px;
+    grid-template: 7ch repeat( 4, 5ch ) / 1fr 1fr;
+    grid-template-areas: 
+        "caution caution"
+        "firstName lastName"
+        "age unknown"
+        "email email"
+        "button button";
+    padding: 24px;
+}
+.updateForm span {
+    grid-area: caution;
+    font-size: 1.1em;
+}
+.updateForm label:has( input[name='email'] ) {
+    grid-area: email;
+}
+.updateForm button {
+    grid-area: button;
+}
+.updateBackButton {
+    width: 300px;
+}

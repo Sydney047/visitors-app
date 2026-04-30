@@ -1,0 +1,21 @@
+<h2><%= searchTitle %></h2>
+<form action="/search" method="post" onsubmit="<% ( e ) => e.preventDefault() %>">
+    <input type="search" name="search" placeholder="Enter User Email To Search" id="search">
+</form>
+<%- include( 'partials/errors.ejs' ) %>
+<% if ( locals.search ) { %>
+    <ul class="searchCardHolder">
+        <li class="searchCard">
+            <span>
+                Name: <%= search.firstName %> <%= search.lastName %>
+            </span>
+            <span>
+                ID: <%= search.id %>,
+                 Age: <%= search.age %>
+            </span>
+            <span>
+                Bio: <%= search.bio %> 
+            </span>
+        </li>
+    </ul>
+<% } %>
