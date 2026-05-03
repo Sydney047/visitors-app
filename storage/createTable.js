@@ -1,6 +1,6 @@
 require( 'dotenv' ).config();
 const { Client } = require('pg');
-const { process } = require('node:process');
+const { env } = require('node:process');
 
 async function createDatabaseTable() {
     const client = new Client({ 
