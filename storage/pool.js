@@ -1,3 +1,4 @@
+require( 'dotenv' ).config();
 const { Pool } = require('pg');
 const { process } = require('node:process');
 
