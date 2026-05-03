@@ -16,7 +16,7 @@
                     <% users.map( user => { %>
                         <li class="userCard" data-delay="<%= user.id %>">
                             <span class="userName">
-                                <%= user.firstName %> <%= user.lastName %>
+                                <%= user.firstname %> <%= user.lastname %>
                             </span>
                             <span class="identifiers">
                                 <p>ID: <b><%= user.id %></b></p>
@@ -40,7 +40,7 @@
             </span>
         </section>
         <aside class="search">
-            <%- include( 'searchUser', { searchTitle: 'Search User' } ) %>
+            <%- include( 'searchUser', { searchTitle: 'Search User'  } ) %>
         </aside>
     </div>
 </body>

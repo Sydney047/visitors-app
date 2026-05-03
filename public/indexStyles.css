@@ -161,7 +161,6 @@ span {
 }
 .searchCardHolder {
     list-style-type: none;
-    animation: flyIn 800ms forwards 100ms ease;
 }
 .searchCard {
     position: relative;
@@ -173,4 +172,6 @@ span {
     padding: 16px;
     border-left: 6px solid #06923E;
     border-right: 4px solid #9A3B3B;
+    animation: flyIn 800ms forwards 100ms ease;
+    margin-top: 10px;
 }
