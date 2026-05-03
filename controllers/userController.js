@@ -1,4 +1,5 @@
 const db = require( '../storage/db' );
+const remoteDB = require( '../storage/queries' );
 const { body, matchedData, validationResult } = require('express-validator');
 
 const isLengthErr= 'must be between 1 and 15 charaters long';
@@ -46,21 +47,23 @@ const validateDeletion = [
     body( 'email' ).trim().isEmail()
 ]
 
-exports.indexController = ( req, res ) => {
-    res.render( 'index', { title: 'Our Visitors', users: db.getUsers() } );
+exports.indexController = async ( req, res ) => {
+    const visitors = await remoteDB.getAllVisitors();
+    console.log( visitors)
+    res.render( 'index', { title: 'Our Visitors', users: visitors } );
 }
 exports.createControllerGet = ( req, res ) => {
     res.render( 'create', { title: 'Add Visitor' } );
 }
 exports.createControllerPost = [
-    validateUser, ( req, res ) => {
+    validateUser, async ( req, res ) => {
         const errors = validationResult( req );
         if ( !errors.isEmpty() ) {
             return res.status( 400 ).render( 'create', { title: 'Add Visitor', errors: errors.array() } );
         }
 
         const { firstName, lastName, email, age, bio } = matchedData( req );
-        db.addUser( firstName, lastName, email, age, bio );
+        await remoteDB.addVisitor( firstName, lastName, email, age, bio )
         res.redirect( '/' );
     }
 ]
@@ -69,7 +72,7 @@ exports.updateUserGet = ( req, res ) => {
     res.render( 'updateUser', { title: 'Update User Information', user } );
 }
 exports.updateUserPost = [
-    validateDataUpdate, ( req, res ) => {
+    validateDataUpdate, async ( req, res ) => {
         const user = req.params.id;
         const errors = validationResult( req );
 
@@ -78,7 +81,7 @@ exports.updateUserPost = [
         }
 
         const { firstName, lastName, email, age } = matchedData( req, { includeOptionals: true } );
-        db.updateUser( user, firstName, lastName, email, age );
+        await remoteDB.updateVisitorInfo( user, firstName, lastName, email, age );
         res.redirect( '/' );
     }
 ]
@@ -86,24 +89,25 @@ exports.deleteUserGet = ( req, res ) => {
     res.render( 'deleteUser', { title: 'Remove Visitor' } );
 }
 exports.deleteUserPost = [
-    validateDeletion, ( req, res ) => {
+    validateDeletion, async ( req, res ) => {
         const { id, email } = matchedData( req );
         
-        console.log(id, email);
-        db.deleteUser( id, email )
+        console.log( id, email );
+        remoteDB.deleteVisitor( id, email )
         res.redirect( '/' );
     }
 ]
 exports.searchControllerPost = [
-    validateSearch, ( req, res ) => {
+    validateSearch, async ( req, res ) => {
         const errors = validationResult( req );
         if ( !errors.isEmpty() ) {
             return res.render( 'searchUser', { title: 'Search Visitor', errors: errors.array() } );
         }
-
-        const search = matchedData( req );
-        console.log( search);
         
-        res.render( 'index', { search: db.searchUser( search.search ), users: db.getUsers(), title: 'List Of Our Users' } );
+        const { search }= matchedData( req );
+        const searchResult = await remoteDB.findVisitor( search );
+        console.log( searchResult );
+        
+        res.render( 'index', { search: searchResult, users: await remoteDB.getAllVisitors(), title: 'List Of Our Users' } );
     }
 ]

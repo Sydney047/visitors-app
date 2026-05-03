@@ -1,3 +1,4 @@
+require( 'dotenv' ).config();
 const express = require('express');
 const path = require('path');
 const indexRouter = require( './routes/indexRouter')
@@ -10,7 +11,7 @@ app.use( express.urlencoded({ extended: true }) );
 const staticAssests = path.join( __dirname, 'public' );
 app.use( express.static( staticAssests ) );
 
-const PORT = process.env.PORT || 3000;``
+const PORT = process.env.PORT || 3000;
 app.listen( PORT, ( error ) => {
     if ( error ) {
         console.log( error );
