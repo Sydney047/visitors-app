@@ -1,4 +1,4 @@
-const db = require( '../storage/db' );
+// const db = require( '../storage/db' );
 const remoteDB = require( '../storage/queries' );
 const { body, matchedData, validationResult } = require('express-validator');
 
@@ -47,12 +47,12 @@ const validateDeletion = [
     body( 'email' ).trim().isEmail()
 ]
 
-exports.indexController = async ( req, res ) => {
+exports.indexController = async ( _req, res ) => {
     const visitors = await remoteDB.getAllVisitors();
     console.log( visitors)
     res.render( 'index', { title: 'Our Visitors', users: visitors } );
 }
-exports.createControllerGet = ( req, res ) => {
+exports.createControllerGet = ( _req, res ) => {
     res.render( 'create', { title: 'Add Visitor' } );
 }
 exports.createControllerPost = [
@@ -85,7 +85,7 @@ exports.updateUserPost = [
         res.redirect( '/' );
     }
 ]
-exports.deleteUserGet = ( req, res ) => {
+exports.deleteUserGet = ( _req, res ) => {
     res.render( 'deleteUser', { title: 'Remove Visitor' } );
 }
 exports.deleteUserPost = [
@@ -93,7 +93,7 @@ exports.deleteUserPost = [
         const { id, email } = matchedData( req );
         
         console.log( id, email );
-        remoteDB.deleteVisitor( id, email )
+        await remoteDB.deleteVisitor( id, email )
         res.redirect( '/' );
     }
 ]
