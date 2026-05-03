@@ -1,6 +1,6 @@
 require( 'dotenv' ).config();
+const { env } = require('node:process');
 const { Pool } = require('pg');
-const { process } = require('node:process');
 
 module.exports = new Pool({
     connectionString: process.env.DATABASE_URL
