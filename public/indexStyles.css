@@ -3,6 +3,14 @@
     --primary: #1B3C53;
     --text-color: #91C8E4;
 }
+@font-face {
+    font-family: 'userFont';
+    src: url( './Redressed-webfont.woff' );
+}
+@font-face {
+    font-family: 'titleFont';
+    src: url( './FontleroyBrown-webfont.woff' );
+}
 body {
     background-color: var(--bg);
     color: var(--text-color);
@@ -30,11 +38,14 @@ nav {
     border-radius: 16px;
     padding-left: 4ch;
     box-shadow: 2px 4px 6px 4px var(--primary);
-    font-size: 1.1em;
+    font-family: 'titleFont';
+}
+nav span {
+    font-size: 2.5em;
 }
 svg {
-    height: 5ch;
-    width: 5ch;
+    height: 2em;
+    width: 2em;
 }
 .container {
     display: grid;
@@ -43,6 +54,7 @@ svg {
         "title title"
         "section aside";
     grid-gap: 5px 24px;
+    max-width: 1024px;
 }
 nav {
     grid-area: title;
@@ -54,7 +66,8 @@ section, .userCardHolder, .userCard {
 }
 .userCardHolder {
     list-style-type: none;
-    gap: 24px;
+    gap: 16px;
+    font-family: "userFont";
 }
 .userCard {
     padding: 24px;
@@ -68,12 +81,12 @@ span {
     gap: 8px;
 }
 .userName {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: bolder;
 }
 .identifiers {
     position: relative;
-    bottom: 2ch;
+    bottom: 1.5ch;
 }
 .bio {
     font-size: 1.3em;
@@ -114,7 +127,11 @@ span {
     opacity: .7;
 }
 .userBtns {
-    align-self: flex-end;
+    position: sticky;
+    align-self: flex-start;
+    top: 32px;
+    z-index: 3;
+    width: 95%;
 }
 .userBtns a {
     display: grid;
@@ -130,6 +147,7 @@ span {
     background-color: #06923E;
     color: #FFEECC;
     box-sizing: border-box;
+    margin-left: auto;
 }
 .addVisitorBtn:hover, .deleteVisitorBtn:hover {
     border: 1px solid var(--text-color);
@@ -140,6 +158,7 @@ span {
     background-color: #9A3B3B;
     color: #FFEECC;
     box-sizing: border-box;
+    margin-right: 16px;
 }
 #search {
     width: 100%;

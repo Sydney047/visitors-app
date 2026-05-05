@@ -11,6 +11,10 @@
         <%- include( 'pageTitle' ) %>
         <section class="visitors">
             <h2><%= title %></h2>
+            <span class="userBtns">
+                <a href="/create" class="addVisitorBtn">Add Visitor</a>
+                <a href="/delete" class="deleteVisitorBtn">Delete A Visitor</a>
+            </span>
             <% if ( locals.users ) { %>
                 <ul class="userCardHolder">
                     <% users.map( user => { %>
@@ -34,10 +38,6 @@
                     <% }); %>
                 </ul>
             <% }; %>
-            <span class="userBtns">
-                <a href="/create" class="addVisitorBtn">Add Visitor</a>
-                <a href="/delete" class="deleteVisitorBtn">Delete A Visitor</a>
-            </span>
         </section>
         <aside class="search">
             <%- include( 'searchUser', { searchTitle: 'Search User'  } ) %>
