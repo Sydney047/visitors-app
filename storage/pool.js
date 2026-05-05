@@ -1,5 +1,4 @@
 require( 'dotenv' ).config();
-const { env } = require('node:process');
 const { Pool } = require('pg');
 
 module.exports = new Pool({
